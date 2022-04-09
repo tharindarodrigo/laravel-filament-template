@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use Spatie\Permission\Models\Permission;
 use App\Helpers\Role as HelpersRole;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Spatie\Permission\Models\Role;
 
-class PermissionPolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 
@@ -22,22 +22,22 @@ class PermissionPolicy
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.view-all');
+        return $user->can('role.view-all');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Permission  $permission
+     * @param  \App\Models\role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Permission $permission)
+    public function view(User $user, Role $role)
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.view');
+        return $user->can('role.view');
     }
 
     /**
@@ -51,66 +51,66 @@ class PermissionPolicy
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.create');
+        return $user->can('role.create');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Permission  $permission
+     * @param  \App\Models\role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Permission $permission)
+    public function update(User $user, Role $role)
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.update');
+        return $user->can('role.update');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Permission  $permission
+     * @param  \App\Models\role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Permission $permission)
+    public function delete(User $user, Role $role)
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.delete');
+        return $user->can('role.delete');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Permission  $permission
+     * @param  \App\Models\role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Permission $permission)
+    public function restore(User $user, Role $role)
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.restore');
+        return $user->can('role.restore');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Permission  $permission
+     * @param  \App\Models\role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Permission $permission)
+    public function forceDelete(User $user, Role $role)
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.force-delete');
+        return $user->can('role.force-delete');
     }
 }

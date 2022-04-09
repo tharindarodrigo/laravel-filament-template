@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Helpers\Permission;
+use App\Helpers\Role as HelpersRole;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -17,10 +18,10 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $roles = [
-            Permission::SUPER_ADMIN,
-            Permission::ADMIN,
-            Permission::MODERATOR,
-            Permission::USER,
+            HelpersRole::SUPER_ADMIN,
+            HelpersRole::ADMIN,
+            HelpersRole::MODERATOR,
+            HelpersRole::USER,
         ];
 
         $userRoles = [];
@@ -34,5 +35,6 @@ class RoleSeeder extends Seeder
             Role::firstOrCreate($userRole);
 
         }
+
     }
 }

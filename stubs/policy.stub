@@ -1,116 +1,108 @@
 <?php
 
-namespace App\Policies;
+namespace {{ namespace }};
 
-use Spatie\Permission\Models\Permission;
-use App\Helpers\Role as HelpersRole;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use {{ namespacedModel }};
+use {{ namespacedUserModel }};
 
-class PermissionPolicy
+class {{ class }}
 {
     use HandlesAuthorization;
 
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
+     * @param  \{{ namespacedUserModel }}  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny({{ user }} $user)
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.view-all');
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Permission  $permission
+     * @param  \{{ namespacedUserModel }}  $user
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Permission $permission)
+    public function view({{ user }} $user, {{ model }} ${{ modelVariable }})
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.view');
     }
 
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
+     * @param  \{{ namespacedUserModel }}  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create({{ user }} $user)
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.create');
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Permission  $permission
+     * @param  \{{ namespacedUserModel }}  $user
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Permission $permission)
+    public function update({{ user }} $user, {{ model }} ${{ modelVariable }})
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.update');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Permission  $permission
+     * @param  \{{ namespacedUserModel }}  $user
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Permission $permission)
+    public function delete({{ user }} $user, {{ model }} ${{ modelVariable }})
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.delete');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Permission  $permission
+     * @param  \{{ namespacedUserModel }}  $user
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Permission $permission)
+    public function restore({{ user }} $user, {{ model }} ${{ modelVariable }})
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.restore');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Permission  $permission
+     * @param  \{{ namespacedUserModel }}  $user
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Permission $permission)
+    public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }})
     {
         if ($user->hasRole(HelpersRole::SUPER_ADMIN)) {
             return true;
         }
-        return $user->can('permission.force-delete');
     }
 }
